@@ -1,0 +1,11 @@
+canvas {
+  border: 1px solid grey;
+}
+body {
+    background-color: black;
+    text-align: center;
+}
+h2 {
+    color: #0C2340;
+    margin: 1em 0 0.25em;
+}
