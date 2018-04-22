@@ -1,7 +1,23 @@
+button {
+  background-color: #0C2340;
+  border: none;
+  color: grey;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Black Han Sans', sans-serif;
+}
+span {
+  color: grey;
+}
+
 canvas {
   border: 1px solid grey;
 }
 body {
+    font-family: 'Black Han Sans', sans-serif;
     background-color: black;
     text-align: center;
 }

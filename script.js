@@ -214,4 +214,3 @@ Ball.prototype.update = function(paddle1, paddle2) {
     }
   }
 };
-d
