@@ -12,39 +12,45 @@ let computerScore = document.getElementById('computerScore');
 const context = canvas.getContext('2d');
 const width = 400;
 const height = 600;
+// Player class
 let player = new Player();
+// Computer class
 let computer = new Computer();
 let ball = new Ball(200,300);
 canvas.width = width;
 canvas.height = height;
 let playerVal = 0;
 let computerVal = 0;
+// Make sure the numbers are converted to actual numbers and not strings
 playerScore.innerHTML = parseInt(playerVal);
 computerScore.innerHTML = parseInt(computerVal);
 
-//setup the controls
+// Setup the controls
 let keyDown = {};
+// Event listener for when the arrow keys are pressed
 window.addEventListener("keydown", function(event){
   keyDown[event.keyCode] = true;
 });
+// Takes the listeners off when key is let go
 window.addEventListener("keyup", function(event){
   delete keyDown[event.keyCode];
 });
 
 
-// when page load attachs canvas and calls step function with animate method
+// When page load attachs canvas and calls step function inside the animate function
 window.onload = function(){
   document.body.appendChild(canvas);
   animate(step);
 };
 
-// update all objects, render the objects and calls animate on itself again
+// Update all objects, render the objects and calls animate on itself again
 let step = function() {
   update();
   render();
   animate(step);
 };
 
+// Shifts all values back to the defaults in which they were initialized
 let reset = function() {
   player = new Player();
   computer = new Computer();
@@ -54,13 +60,15 @@ let reset = function() {
   playerScore.innerHTML = parseInt(playerVal);
   computerScore.innerHTML = parseInt(computerVal);
 };
+
+// Function that groups all the custom prototype updates and runs when together
 let update = function() {
   player.update();
   computer.update(ball);
   ball.update(player.paddle, computer.paddle);
 };
 
-//renders the 2d context to the screen
+// Renders the 2d context to the screen
 let render = function() {
   context.fillStyle = "#0C2340";
   context.fillRect(0, 0, width, height);
@@ -69,7 +77,7 @@ let render = function() {
   ball.render();
 };
 
-// create a paddle and give it an x,y position, width, height
+// Create a paddle and give it an x,y position, width, height
 function Paddle(x, y, width, height) {
   this.x = x;
   this.y = y;
@@ -79,7 +87,7 @@ function Paddle(x, y, width, height) {
   this.y_speed = 0;
 };
 
-// function that will render the paddle to the screen
+// Creates prototype method on paddle that will render the paddle to the screen
 Paddle.prototype.render = function() {
   context.fillStyle = "#A1AAAD";
   context.fillRect(this.x, this.y, this.width, this.height);
@@ -98,21 +106,21 @@ Paddle.prototype.move = function(x, y){
   }
 };
 
-// function that creates a new player paddle
+// Class function that creates a new player paddle
 function Player(){
   this.paddle = new Paddle(175, 580, 50, 10);
 };
 
-// function that creates a new computer paddle
+// Class function that creates a new computer paddle
 function Computer(){
   this.paddle = new Paddle(175, 10, 50, 10);
 };
 
-// function that renders player paddle
+// Creates prototype method that renders player paddle
 Player.prototype.render = function() {
   this.paddle.render();
 };
-
+// Prototype method that updates the player paddle based on which arrow key is pressed
 Player.prototype.update = function() {
   for(let key in keyDown){
     let value = Number(key);
@@ -126,12 +134,15 @@ Player.prototype.update = function() {
   }
 };
 
-//function that renders computer paddle
+// Creates prototype method that renders computer paddle
 Computer.prototype.render = function() {
   this.paddle.render();
 };
+// Prototype method that updates the computer paddles position based on where the ball is
 Computer.prototype.update = function() {
+  // x_pos equals ball width numbber
   let x_pos = ball.x;
+
   let diff = -((this.paddle.x + (this.paddle.width/2)) - x_pos);
   if(diff < 0 && diff < -4){ //max speed left
     diff = -5;
@@ -146,7 +157,7 @@ Computer.prototype.update = function() {
   }
 };
 
-// creates a ball
+// Creates ball class
 function Ball(x, y){
   this.x = x;
   this.y = y;
@@ -155,14 +166,14 @@ function Ball(x, y){
   this.radius = 5;
 };
 
-//function that renders ball to screen
+// Prototype method that renders ball to screen
 Ball.prototype.render = function(){
   context.beginPath();
   context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
   context.fillStyle = "#000000";
   context.fill();
 };
-
+// Updates ball pos based on walls and the paddles
 Ball.prototype.update = function(paddle1, paddle2) {
   this.x += this.x_speed;
   this.y += this.y_speed;
@@ -171,28 +182,28 @@ Ball.prototype.update = function(paddle1, paddle2) {
   let bottom_x = this.x + 5;
   let bottom_y = this.y + 5;
 
-  if (this.x - 5 < 0){ //hitting the left wall
+  if (this.x - 5 < 0){ // Hitting the left wall
       this.x = 5;
       this.x_speed = -this.x_speed;
-  }else if(this.x + 5 > 400){ //hitting the right wall
+  }else if(this.x + 5 > 400){ // Hitting the right wall
       this.x = 395;
       this.x_speed = -this.x_speed;
   }
 
-  if(this.y < 0){ // a point was scored
+  if(this.y < 0){ // A point was scored
     this.x_speed = 0;
     this.y_speed = 3;
-    // resets ball back to starting location
+    // Resets ball back to starting location
     this.x = 200;
     this.y = 300;
     playerScore.innerHTML += +1;
-    //Keeps players score
+    // Keeps players score
     playerVal += 1
     playerScore.innerHTML = parseInt(playerVal);
   }else if(this.y > 600){
     this.x_speed = 0;
     this.y_speed = 3;
-    // resets ball back to starting location
+    // Resets ball back to starting location
     this.x = 200;
     this.y = 300;
     // Keeps computers Score
