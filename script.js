@@ -190,7 +190,7 @@ Ball.prototype.update = function(paddle1, paddle2) {
       this.x_speed = -this.x_speed;
   }
 
-  if(this.y < 0){ // A point was scored
+  if(this.y < 0){ // Ball goes through top of screen and player scores
     this.x_speed = 0;
     this.y_speed = 3;
     // Resets ball back to starting location
@@ -200,13 +200,13 @@ Ball.prototype.update = function(paddle1, paddle2) {
     // Keeps players score
     playerVal += 1
     playerScore.innerHTML = parseInt(playerVal);
-  }else if(this.y > 600){
+  }else if(this.y > 600){ // Ball goes through bottom of screen and computer scores
     this.x_speed = 0;
     this.y_speed = 3;
     // Resets ball back to starting location
     this.x = 200;
     this.y = 300;
-    // Keeps computers Score
+    // Keeps computers score
     computerVal += 1
     computerScore.innerHTML = parseInt(computerVal);
   }
