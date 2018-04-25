@@ -70,7 +70,7 @@ let update = function() {
 
 // Renders the 2d context to the screen
 let render = function() {
-  context.fillStyle = "#0C2340";
+  context.fillStyle = "#fc4a1a";
   context.fillRect(0, 0, width, height);
   player.render();
   computer.render();
@@ -89,7 +89,7 @@ function Paddle(x, y, width, height) {
 
 // Creates prototype method on paddle that will render the paddle to the screen
 Paddle.prototype.render = function() {
-  context.fillStyle = "#A1AAAD";
+  context.fillStyle = "#1cefff";
   context.fillRect(this.x, this.y, this.width, this.height);
 };
 Paddle.prototype.move = function(x, y){
@@ -124,9 +124,9 @@ Player.prototype.render = function() {
 Player.prototype.update = function() {
   for(let key in keyDown){
     let value = Number(key);
-    if(value == 37) { //left arrow
+    if(value == 37 || value == 65) { //left arrow
       this.paddle.move(-4, 0);
-    }else if(value == 39) { // right arrow
+    }else if(value == 39 || value == 68) { // right arrow
       this.paddle.move(4,0);
     }else {
       this.paddle.move(0,0);
@@ -170,7 +170,7 @@ function Ball(x, y){
 Ball.prototype.render = function(){
   context.beginPath();
   context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-  context.fillStyle = "#000000";
+  context.fillStyle = "#ADD100";
   context.fill();
 };
 // Updates ball pos based on walls and the paddles

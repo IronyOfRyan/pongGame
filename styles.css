@@ -1,7 +1,7 @@
 button {
-  background-color: #0C2340;
+  background-color: #fc4a1a;
   border: none;
-  color: grey;
+  color: #1cefff;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -10,18 +10,20 @@ button {
   font-family: 'Black Han Sans', sans-serif;
 }
 span {
-  color: grey;
+  color: #1cefff;
 }
 
 canvas {
-  border: 1px solid grey;
+  border: 1px solid #1cefff;
 }
 body {
-    font-family: 'Black Han Sans', sans-serif;
-    background-color: black;
-    text-align: center;
+  font-family: 'Black Han Sans', sans-serif;
+  background: #ADD100;
+  background: -webkit-linear-gradient(to right, #7B920A, #ADD100);
+  background: linear-gradient(to right, #7B920A, #ADD100);
+  text-align: center;
 }
 h2 {
-    color: #0C2340;
+    color: #fc4a1a;
     margin: 1em 0 0.25em;
 }
